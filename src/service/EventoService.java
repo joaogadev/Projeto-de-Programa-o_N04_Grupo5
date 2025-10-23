@@ -39,7 +39,7 @@ public class EventoService {
         return "Usuário não encontrado.";
     }
 
-    public List<Usuario> listarUsuarios() {// Metodo para lista os usuarios
+    public List<Usuario> listarUsuarios() {// Metodo para listar os usuarios
         return listaUsuarios;
     }
 }
