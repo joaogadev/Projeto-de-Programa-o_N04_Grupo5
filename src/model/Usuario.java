@@ -57,4 +57,8 @@ public class Usuario {
   public void setPermissao(Permissao permissao) {
     this.permissao = permissao;
   }
+
+  public String toString(){
+        return "Usuário [Id: " + getId() + ", Nome: " + getNome()+ ", Email: " + getEmail() + "]";
+  }
 }
