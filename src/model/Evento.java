@@ -12,13 +12,14 @@ public class Evento {
     private String local;
     private String categoria;
     private Usuario admin;
+    private int adminId;
     private String status;
 
 
 
   public Evento(){
   }
-  public Evento(int id, String nome, String descricao, LocalDate dataInicio, LocalDate dataFim, String local, String categoria, String status, Usuario admin) {
+  public Evento(int id, String nome, String descricao, LocalDate dataInicio, LocalDate dataFim, String local, String categoria, String status, Usuario admin, int adminId) {
       this.id = id;
       this.nome = nome;
       this.descricao = descricao;
@@ -28,6 +29,7 @@ public class Evento {
       this.categoria = categoria;
       this.status = status;
       this.admin = admin;
+      this.adminId = adminId;
     }
 
     public int getId() {
@@ -100,5 +102,13 @@ public class Evento {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public int getAdminId() {
+        return adminId;
+    }
+
+    public void setAdminId(int adminId) {
+        this.adminId = adminId;
     }
 }
