@@ -1,7 +1,9 @@
 package model;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Date;
+
 
 public class Evento {
     private int id;
@@ -9,6 +11,8 @@ public class Evento {
     private String descricao;
     private LocalDate dataInicio;
     private LocalDate dataFim;
+    private LocalTime horarioInicio;
+    private LocalTime horarioFim;
     private String local;
     private String categoria;
     private Usuario admin;
@@ -18,12 +22,14 @@ public class Evento {
 
   public Evento(){
   }
-  public Evento(int id, String nome, String descricao, LocalDate dataInicio, LocalDate dataFim, String local, String categoria, String status, Usuario admin) {
+  public Evento(int id, String nome, String descricao, LocalDate dataInicio, LocalDate dataFim,LocalTime horarioInicio,LocalTime horarioFim, String local, String categoria, String status, Usuario admin) {
       this.id = id;
       this.nome = nome;
       this.descricao = descricao;
       this.dataInicio = dataInicio;
       this.dataFim = dataFim;
+      this.horarioInicio = horarioInicio;
+      this.horarioFim = horarioFim;
       this.local = local;
       this.categoria = categoria;
       this.status = status;
@@ -70,6 +76,22 @@ public class Evento {
         this.dataFim = dataFim;
     }
 
+    public LocalTime getHorarioInicio(){
+        return horarioInicio;
+    }
+
+    public void setHorarioInicio(LocalTime horarioInicio){
+        this.horarioInicio = horarioInicio;
+    }
+
+    public LocalTime getHorarioFim(){
+        return horarioFim;
+    }
+
+    public void setHorarioFim(LocalTime horarioFim){
+        this.horarioFim = horarioFim;
+    }
+
     public String getLocal() {
         return local;
     }
@@ -100,5 +122,16 @@ public class Evento {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public void exibirEvento(){
+        System.out.println("Id evento: "+getId());
+        System.out.println("Nome do evento: "+getNome());
+        System.out.println("Descrição do evento: "+getDescricao());
+        System.out.println("Data de início: "+getDataInicio());
+        System.out.println("Data de termino: "+getDataFim());
+        System.out.println("Local do evento: "+getLocal());
+        System.out.println("Categoria: "+getCategoria());
+        System.out.println("Status: "+getStatus());
     }
 }

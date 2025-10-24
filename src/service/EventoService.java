@@ -1,4 +1,3 @@
-// permitir inscrição e cancelamento de participantes --FEITO (ou não)
 // evitar conflitos de horários
 // filtrar eventos
 // listar eventos
@@ -12,34 +11,25 @@ import model.Usuario;
 
 public class EventoService {
 
-    private List<Usuario> listaUsuarios = new ArrayList<>(); // Lista com os usuários
+    ArrayList<Evento> listaEventos = new ArrayList<>();
 
-    public List<Evento> listarEventosDoUsuario(Usuario usuario) {
-        throw new UnsupportedOperationException("Unimplemented method 'listarEventosDoUsuario'");
+    public void filtrarEvento(){
+
     }
 
-    public String inscreverUsuario(Usuario novoUsuario) {// Método para adicionar usuarios a uma lista
-        for (Usuario u : listaUsuarios) {
-            if (u.getId() == novoUsuario.getId()) {
-                return "Esse usuário já está cadastrado.";
-            }
+    public void listarEvento(){ // loop para exibir os dados de uma listagem de eventos
+        for(Evento e : listaEventos){
+            e.exibirEvento();
         }
-
-        listaUsuarios.add(novoUsuario);
-        return "Usuário inscrito com sucesso!";
     }
 
-    public String desinscreverUsuario(int idUsuario) {// Método para remover usuarios de uma lista
-        for (Usuario u : listaUsuarios) {
-            if (u.getId() == idUsuario) {
-                listaUsuarios.remove(u);
-                return "Usuário removido com sucesso.";
-            }
+    public Evento checarConflito() throws Exception{ //Método para checar conflito entre horarios
+
+        /*if(horarioInicio do evento x == horarioInicio do evento y){
+            throw new Exception("Evento já agendado.");
         }
-        return "Usuário não encontrado.";
-    }
-
-    public List<Usuario> listarUsuarios() {// Metodo para listar os usuarios
-        return listaUsuarios;
+        else{
+            System.out.println("Horario disponivel");
+        }*/
     }
 }
