@@ -1,0 +1,19 @@
+Relatório Semanal 
+Usuário ID: 1
+Período: Últimos 7 dias
+------------------------------------------------
+
+Evento: Hackathon 2026
+Descrição: Competição de programação intensiva
+Início: 20/02/2026 09:00
+Fim: 21/02/2026 20:00
+Local: Recife - PE
+Categoria: Tecnologia
+-----------------------------------------------
+Evento: Workshop de Inovação
+Descrição: Evento sobre criatividade e inovação
+Início: 10/11/2025 09:00
+Fim: 10/11/2025 17:00
+Local: São Paulo - SP
+Categoria: Tecnologia
+-----------------------------------------------
