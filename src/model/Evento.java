@@ -101,4 +101,17 @@ public class Evento {
     public void setStatus(String status) {
         this.status = status;
     }
+    @Override
+    public String toString() {
+        return "\n--- EVENTO ---" +
+                "\nID: " + id +
+                "\nNome: " + nome +
+                "\nDescrição: " + descricao +
+                "\nLocal: " + local +
+                "\nCategoria: " + categoria +
+                "\nStatus: " + status +
+                "\nInício: " + dataInicio +
+                "\nFim: " + dataFim +
+                "\n----------------------------";
+    }
 }
