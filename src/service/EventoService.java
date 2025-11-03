@@ -3,6 +3,7 @@ package service;
 import model.Evento;
 import repository.EventoRepository;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.sql.Date;
 import java.util.List;
@@ -28,7 +29,7 @@ public class EventoService {
     }
 
 
-    public boolean temConflito(LocalDate dataInicio, LocalDate dataFim) {
+    public boolean temConflito(LocalDateTime dataInicio, LocalDateTime dataFim) {
         try {
             List<Evento> eventos = eventoRepository.listarTodos();
             for (Evento e : eventos){

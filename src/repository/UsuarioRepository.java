@@ -1,11 +1,6 @@
 package repository;
-
-<<<<<<< HEAD
-public class UsuarioRepository {
-=======
 import model.Permissao;
 import model.Usuario;
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -154,5 +149,4 @@ public class UsuarioRepository {
         usuario.setPermissao(Permissao.USUARIO);
         return usuario;
     }
->>>>>>> cbb8e5e (Concertando erros na classe UsuarioRepository e padronizando-a)
 }

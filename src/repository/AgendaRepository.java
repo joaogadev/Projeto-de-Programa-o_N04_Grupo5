@@ -43,9 +43,8 @@ public class AgendaRepository {
                 Evento ev = new Evento();
                 ev.setId(rs.getInt("Evento_id"));
                 ev.setNome(rs.getString("nome"));
-                // Converte Timestamp → LocalDateTime → LocalDate
-                ev.setDataInicio(rs.getTimestamp("dataInicio").toLocalDateTime().toLocalDate());
-                ev.setDataFim(rs.getTimestamp("dataFim").toLocalDateTime().toLocalDate());
+                ev.setDataInicio(rs.getTimestamp("dataInicio").toLocalDateTime());
+                ev.setDataFim(rs.getTimestamp("dataFim").toLocalDateTime());
                 ev.setLocal(rs.getString("local"));
                 ev.setCategoria(rs.getString("categoria"));
                 ev.setStatus(rs.getString("status"));

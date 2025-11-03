@@ -19,8 +19,8 @@ public class EventoRepository {
                 evento.setId(resultSet.getInt("Evento_id"));
                 evento.setNome(resultSet.getString("nome"));
                 evento.setDescricao(resultSet.getString("descricao"));
-                evento.setDataInicio(LocalDate.from(resultSet.getTimestamp("dataInicio").toLocalDateTime()));
-                evento.setDataFim(LocalDate.from(resultSet.getTimestamp("dataFim").toLocalDateTime()));
+                evento.setDataInicio(resultSet.getTimestamp("dataInicio").toLocalDateTime());
+                evento.setDataFim(resultSet.getTimestamp("dataFim").toLocalDateTime());
                 evento.setLocal(resultSet.getString("local"));
                 evento.setCategoria(resultSet.getString("categoria"));
                 evento.setStatus(resultSet.getString("status"));
@@ -38,10 +38,10 @@ public class EventoRepository {
              PreparedStatement stmt = conexao.prepareStatement(sql)) {
             stmt.setString(1, evento.getNome());
             stmt.setString(2, evento.getDescricao());
-            if (evento.getDataInicio() != null) {stmt.setDate(3, java.sql.Date.valueOf(evento.getDataInicio()));
-            } else {stmt.setNull(3, java.sql.Types.DATE);}
+            if (evento.getDataInicio() != null) {stmt.setTimestamp(3, java.sql.Timestamp.valueOf(evento.getDataInicio()));
+            } else {stmt.setNull(3, Types.TIMESTAMP);}
 
-            if (evento.getDataFim() != null) {stmt.setDate(4, java.sql.Date.valueOf(evento.getDataFim()));
+            if (evento.getDataFim() != null) {stmt.setTimestamp(4, java.sql.Timestamp.valueOf(evento.getDataFim()));
             } else {stmt.setNull(4, java.sql.Types.DATE);}
 
             stmt.setString(5, evento.getLocal());
@@ -102,8 +102,8 @@ public class EventoRepository {
                 e.setId(rs.getInt("Evento_id"));
                 e.setNome(rs.getString("nome"));
                 e.setDescricao(rs.getString("descricao"));
-                e.setDataInicio(rs.getTimestamp("dataInicio").toLocalDateTime().toLocalDate());
-                e.setDataFim(rs.getTimestamp("dataFim").toLocalDateTime().toLocalDate());
+                e.setDataInicio(rs.getTimestamp("dataInicio").toLocalDateTime());
+                e.setDataFim(rs.getTimestamp("dataFim").toLocalDateTime());
                 e.setLocal(rs.getString("local"));
                 e.setCategoria(rs.getString("categoria"));
                 e.setStatus(rs.getString("status"));

@@ -20,8 +20,7 @@ public class AgendaController {
     public void tentarAdicionarEvento(Evento newEvento) {
         try {
             //converte localdate pata localdatetime(armengo)
-            LocalDate data = newEvento.getDataInicio();
-            LocalDateTime dataInicioDateTime = data.atStartOfDay();
+            LocalDateTime dataInicioDateTime = newEvento.getDataInicio();
             //Verifica se já existe evento no mesmo local e data
             boolean ocu = agendaRepository.estaOcupado(dataInicioDateTime, newEvento.getLocal());
             if (ocu) {
@@ -49,8 +48,8 @@ public class AgendaController {
         Evento novoEvento = new Evento();
         novoEvento.setNome("Workshop de Criatividade");
         novoEvento.setLocal("São Paulo - SP");
-        novoEvento.setDataInicio(LocalDate.of(2025, 11, 10));
-        novoEvento.setDataFim(LocalDate.of(2025, 11, 10));
+        novoEvento.setDataInicio(LocalDateTime.of(2025, 11, 10,9,0));
+        novoEvento.setDataFim(LocalDateTime.of(2025, 11, 10,17,0));
         novoEvento.setCategoria("Tecnologia");
         novoEvento.setStatus("Planejado");
 

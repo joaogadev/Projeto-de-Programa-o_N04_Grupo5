@@ -1,14 +1,15 @@
 package model;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 public class Evento {
     private int id;
     private String nome;
     private String descricao;
-    private LocalDate dataInicio;
-    private LocalDate dataFim;
+    private LocalDateTime dataInicio;
+    private LocalDateTime dataFim;
     private String local;
     private String categoria;
     private Usuario admin;
@@ -18,7 +19,7 @@ public class Evento {
 
   public Evento(){
   }
-  public Evento(int id, String nome, String descricao, LocalDate dataInicio, LocalDate dataFim, String local, String categoria, String status, Usuario admin) {
+  public Evento(int id, String nome, String descricao, LocalDateTime dataInicio, LocalDateTime dataFim, String local, String categoria, String status, Usuario admin) {
       this.id = id;
       this.nome = nome;
       this.descricao = descricao;
@@ -54,19 +55,19 @@ public class Evento {
         this.descricao = descricao;
     }
 
-    public LocalDate getDataInicio() {
+    public LocalDateTime getDataInicio() {
         return dataInicio;
     }
 
-    public void setDataInicio(LocalDate dataInicio) {
+    public void setDataInicio(LocalDateTime dataInicio) {
         this.dataInicio = dataInicio;
     }
 
-    public LocalDate getDataFim() {
+    public LocalDateTime getDataFim() {
         return dataFim;
     }
 
-    public void setDataFim(LocalDate dataFim) {
+    public void setDataFim(LocalDateTime dataFim) {
         this.dataFim = dataFim;
     }
 
