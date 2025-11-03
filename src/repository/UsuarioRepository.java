@@ -1,7 +1,6 @@
 package repository;
 import model.Permissao;
 import model.Usuario;
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;

@@ -26,8 +26,8 @@ public class AgendaService {
                 evento.setLocal(rs.getString("local"));
                 evento.setCategoria(rs.getString("categoria"));
                 evento.setStatus(rs.getString("status"));
-                evento.setDataInicio(LocalDate.from(rs.getTimestamp("dataInicio").toLocalDateTime()));
-                evento.setDataFim(LocalDate.from(rs.getTimestamp("dataFim").toLocalDateTime()));
+                evento.setDataInicio(rs.getTimestamp("dataInicio").toLocalDateTime());
+                evento.setDataFim(rs.getTimestamp("dataFim").toLocalDateTime());
                 eventos.add(evento);
             }
 
@@ -55,8 +55,8 @@ public class AgendaService {
                 evento.setLocal(rs.getString("local"));
                 evento.setCategoria(rs.getString("categoria"));
                 evento.setStatus(rs.getString("status"));
-                evento.setDataInicio(LocalDate.from(rs.getTimestamp("dataInicio").toLocalDateTime()));
-                evento.setDataFim(LocalDate.from(rs.getTimestamp("dataFim").toLocalDateTime()));
+                evento.setDataInicio(rs.getTimestamp("dataInicio").toLocalDateTime());
+                evento.setDataFim(rs.getTimestamp("dataFim").toLocalDateTime());
                 eventos.add(evento);
             }
 
@@ -84,8 +84,8 @@ public class AgendaService {
                 evento.setLocal(rs.getString("local"));
                 evento.setCategoria(rs.getString("categoria"));
                 evento.setStatus(rs.getString("status"));
-                evento.setDataInicio(LocalDate.from(rs.getTimestamp("dataInicio").toLocalDateTime()));
-                evento.setDataFim(LocalDate.from(rs.getTimestamp("dataFim").toLocalDateTime()));
+                evento.setDataInicio(rs.getTimestamp("dataInicio").toLocalDateTime());
+                evento.setDataFim(rs.getTimestamp("dataFim").toLocalDateTime());
                 eventos.add(evento);
             }
 
@@ -114,8 +114,8 @@ public class AgendaService {
                 evento.setLocal(rs.getString("local"));
                 evento.setCategoria(rs.getString("categoria"));
                 evento.setStatus(rs.getString("status"));
-                evento.setDataInicio(LocalDate.from(rs.getTimestamp("dataInicio").toLocalDateTime()));
-                evento.setDataFim(LocalDate.from(rs.getTimestamp("dataFim").toLocalDateTime()));
+                evento.setDataInicio(rs.getTimestamp("dataInicio").toLocalDateTime());
+                evento.setDataFim(rs.getTimestamp("dataFim").toLocalDateTime());
                 eventos.add(evento);
             }
 
