@@ -1,8 +1,9 @@
 package model;
-
 import java.time.LocalDate;
+
 import java.time.LocalDateTime;
 import java.util.Date;
+
 
 public class Evento {
     private int id;
@@ -12,8 +13,8 @@ public class Evento {
     private LocalDateTime dataFim;
     private String local;
     private String categoria;
-    private Usuario admin;
     private String status;
+    private Usuario admin;
 
 
 
