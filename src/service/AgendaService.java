@@ -1,8 +1,6 @@
 package service;
 
 import model.Evento;
-import repository.MyJDBC;
-
 import java.sql.*;
 import java.sql.Connection;
 import java.time.LocalDate;

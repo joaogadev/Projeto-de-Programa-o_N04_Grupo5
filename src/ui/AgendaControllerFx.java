@@ -4,8 +4,6 @@ import com.toedter.calendar.JCalendar;
 import javax.swing.*;
 import java.awt.*;
 import java.util.*;
-import model.Evento;
-import service.EventoService;
 public class AgendaControllerFx {
     private JFrame frame;
     JCalendar calendar;
