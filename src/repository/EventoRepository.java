@@ -54,16 +54,12 @@ public class EventoRepository {
         }
     }
 
-
     public boolean remover(int id) {
         String sql = "DELETE FROM Evento WHERE Evento_id = ?";
-
-
         try (Connection conexao = MyJDBC.getConnection();
              PreparedStatement stmt = conexao.prepareStatement(sql)) {
             stmt.setInt(1, id);
             int linhasAfetadas = stmt.executeUpdate();
-
 
             if (linhasAfetadas > 0) {
                 System.out.println("Evento removido com sucesso!");
@@ -72,6 +68,7 @@ public class EventoRepository {
                 System.out.println("Nenhum evento encontrado com o ID informado.");
                 return false;
             }
+
         } catch (SQLException e) {
             System.err.println("Erro ao remover evento: " + e.getMessage());
             e.printStackTrace();
@@ -80,5 +77,31 @@ public class EventoRepository {
     }
     public List<Evento> listarTodos() {
         return buscarEventos();
+    }
+
+    public List<Evento> listarPorUsuario(int usuarioId) {
+        List<Evento> eventos = new ArrayList<>();
+        String sql = "SELECT * FROM Evento WHERE usuario_id = ?";
+        try (Connection conexao = MyJDBC.getConnection();
+             PreparedStatement stmt = conexao.prepareStatement(sql)) {
+            stmt.setInt(1, usuarioId);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                Evento evento = new Evento();
+                evento.setId(rs.getInt("Evento_id"));
+                evento.setNome(rs.getString("nome"));
+                evento.setDescricao(rs.getString("descricao"));
+                evento.setDataInicio(rs.getDate("dataInicio").toLocalDate());
+                evento.setDataFim(rs.getDate("dataFim").toLocalDate());
+                evento.setLocal(rs.getString("local"));
+                evento.setCategoria(rs.getString("categoria"));
+                evento.setStatus(rs.getString("status"));
+                eventos.add(evento);
+            }
+        } catch (SQLException e) {
+            System.err.println("Erro ao listar eventos do usuário: " + e.getMessage());
+            e.printStackTrace();
+        }
+        return eventos;
     }
 }
