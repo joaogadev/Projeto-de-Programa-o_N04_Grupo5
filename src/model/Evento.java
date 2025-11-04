@@ -1,7 +1,7 @@
 package model;
-
 import java.time.LocalDate;
-import java.time.LocalTime;
+
+import java.time.LocalDateTime;
 import java.util.Date;
 
 
@@ -9,27 +9,23 @@ public class Evento {
     private int id;
     private String nome;
     private String descricao;
-    private LocalDate dataInicio;
-    private LocalDate dataFim;
-    private LocalTime horarioInicio;
-    private LocalTime horarioFim;
+    private LocalDateTime dataInicio;
+    private LocalDateTime dataFim;
     private String local;
     private String categoria;
-    private Usuario admin;
     private String status;
+    private Usuario admin;
 
 
 
   public Evento(){
   }
-  public Evento(int id, String nome, String descricao, LocalDate dataInicio, LocalDate dataFim,LocalTime horarioInicio,LocalTime horarioFim, String local, String categoria, String status, Usuario admin) {
+  public Evento(int id, String nome, String descricao, LocalDateTime dataInicio, LocalDateTime dataFim, String local, String categoria, String status, Usuario admin) {
       this.id = id;
       this.nome = nome;
       this.descricao = descricao;
       this.dataInicio = dataInicio;
       this.dataFim = dataFim;
-      this.horarioInicio = horarioInicio;
-      this.horarioFim = horarioFim;
       this.local = local;
       this.categoria = categoria;
       this.status = status;
@@ -60,36 +56,20 @@ public class Evento {
         this.descricao = descricao;
     }
 
-    public LocalDate getDataInicio() {
+    public LocalDateTime getDataInicio() {
         return dataInicio;
     }
 
-    public void setDataInicio(LocalDate dataInicio) {
+    public void setDataInicio(LocalDateTime dataInicio) {
         this.dataInicio = dataInicio;
     }
 
-    public LocalDate getDataFim() {
+    public LocalDateTime getDataFim() {
         return dataFim;
     }
 
-    public void setDataFim(LocalDate dataFim) {
+    public void setDataFim(LocalDateTime dataFim) {
         this.dataFim = dataFim;
-    }
-
-    public LocalTime getHorarioInicio(){
-        return horarioInicio;
-    }
-
-    public void setHorarioInicio(LocalTime horarioInicio){
-        this.horarioInicio = horarioInicio;
-    }
-
-    public LocalTime getHorarioFim(){
-        return horarioFim;
-    }
-
-    public void setHorarioFim(LocalTime horarioFim){
-        this.horarioFim = horarioFim;
     }
 
     public String getLocal() {
@@ -123,15 +103,17 @@ public class Evento {
     public void setStatus(String status) {
         this.status = status;
     }
-
-    public void exibirEvento(){
-        System.out.println("Id evento: "+getId());
-        System.out.println("Nome do evento: "+getNome());
-        System.out.println("Descrição do evento: "+getDescricao());
-        System.out.println("Data de início: "+getDataInicio());
-        System.out.println("Data de termino: "+getDataFim());
-        System.out.println("Local do evento: "+getLocal());
-        System.out.println("Categoria: "+getCategoria());
-        System.out.println("Status: "+getStatus());
+    @Override
+    public String toString() {
+        return "\n--- EVENTO ---" +
+                "\nID: " + id +
+                "\nNome: " + nome +
+                "\nDescrição: " + descricao +
+                "\nLocal: " + local +
+                "\nCategoria: " + categoria +
+                "\nStatus: " + status +
+                "\nInício: " + dataInicio +
+                "\nFim: " + dataFim +
+                "\n----------------------------";
     }
 }

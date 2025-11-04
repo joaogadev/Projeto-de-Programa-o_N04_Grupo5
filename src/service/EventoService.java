@@ -4,32 +4,89 @@
 
 package service;
 
-import java.util.ArrayList;
-import java.util.List;
 import model.Evento;
-import model.Usuario;
+import repository.EventoRepository;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.sql.Date;
+import java.util.List;
+import java.sql.Date;
 
 public class EventoService {
+    private EventoRepository eventoRepository = new EventoRepository();
 
-    ArrayList<Evento> listaEventos = new ArrayList<>();
-
-    public void filtrarEvento(){
-
-    }
-
-    public void listarEvento(){ // loop para exibir os dados de uma listagem de eventos
-        for(Evento e : listaEventos){
-            e.exibirEvento();
+    public boolean cadastrarEvento (Evento novoEvento) {
+        try {
+            if (temConflito(novoEvento.getDataInicio(), novoEvento.getDataFim())) {
+                System.out.println("Confilito detectado: já existe um evento nesse período!");
+                return false;
+            }
+            eventoRepository.salvar(novoEvento);
+            System.out.println("Evento cadastrado com sucesso!");
+            return true;
+        } catch (Exception e) {
+            System.err.println("Erro ao cadastrar evento: " + e.getMessage());
+            e.printStackTrace();
+            return false;
         }
     }
 
-    public Evento checarConflito() throws Exception{ //Método para checar conflito entre horarios
 
-        /*if(horarioInicio do evento x == horarioInicio do evento y){
-            throw new Exception("Evento já agendado.");
+    public boolean temConflito(LocalDateTime dataInicio, LocalDateTime dataFim) {
+        try {
+            List<Evento> eventos = eventoRepository.listarTodos();
+            for (Evento e : eventos){
+                boolean conflito = !(dataFim.isBefore(e.getDataInicio()) || dataInicio.isAfter(e.getDataFim()));
+                if (conflito) {
+                    return true;
+                }
+            }
+        } catch (Exception e) {
+            System.err.println("Erro ao verificar conflito de eventos: " + e.getMessage());
+            e.printStackTrace();
         }
-        else{
-            System.out.println("Horario disponivel");
-        }*/
+        return false;
+    }
+
+    public List<Evento> listarEventos() {
+        try {
+            return eventoRepository.listarTodos();
+        } catch (Exception e) {
+            System.err.println("Erro ao listar eventos: " + e.getMessage());
+            e.printStackTrace();
+            return new ArrayList<>();
+        }
+    }
+
+    public List<Evento> filtrarPorCategoria(String categoria) {
+        List<Evento> filtrados = new ArrayList<>();
+        try {
+            for (Evento e : eventoRepository.listarTodos()) {
+                if (e.getCategoria() != null && e.getCategoria().equalsIgnoreCase(categoria)) {
+                    filtrados.add(e);
+
+
+                }
+            }
+        } catch (Exception e) {
+            System.err.println("Erro ao filtrar evento por categoria: " + e.getMessage());
+            e.printStackTrace();
+        }
+        return filtrados;
+    }
+
+    public boolean removerEvento(int id) {
+        try {
+            return eventoRepository.remover(id);
+        } catch (Exception e) {
+            System.err.println("Erro ao remover evento: " + e.getMessage());
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public List<Evento> buscarPorData(Date data) {
+        return eventoRepository.buscarPorData(data);
     }
 }
