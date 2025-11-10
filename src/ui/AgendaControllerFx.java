@@ -3,10 +3,12 @@ package ui;
 import com.toedter.calendar.JCalendar;
 import service.AgendaService;
 import model.Evento;
+import service.RelatorioService;
 
 import javax.swing.*;
 import java.awt.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Arrays;
 import java.util.Date;
@@ -18,8 +20,10 @@ public class AgendaControllerFx {
     private JTextArea eventosTextArea;
     private AgendaService agendaService;
 
+
     public AgendaControllerFx() {
         agendaService = new AgendaService();
+        RelatorioService relatorioService = new RelatorioService();
 
         frame = new JFrame("Agenda de Eventos");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -28,6 +32,67 @@ public class AgendaControllerFx {
 
         calendar = new JCalendar();
         frame.add(calendar, BorderLayout.NORTH);
+
+
+
+        // Painel superior real do JCalendar (contém mês, ano e setas)
+        JPanel topPanel = (JPanel) calendar.getComponent(0);
+
+        // Troca o layout para permitir inserir botão à direita
+        topPanel.setLayout(new BorderLayout());
+
+        // Painel original contendo mês e ano (fica na esquerda)
+        JPanel monthYearPanel = (JPanel) topPanel.getComponent(0);
+
+        // Painel da direita com o botão
+        JPanel rightPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+
+        JButton relatorioButton = new JButton("Gerar Relatório");
+        relatorioButton.setFont(new Font("Arial", Font.BOLD, 14));
+
+        rightPanel.add(relatorioButton);
+
+        // Remonta o topPanel agora dividido
+        topPanel.removeAll();
+        topPanel.add(monthYearPanel, BorderLayout.WEST);
+        topPanel.add(rightPanel, BorderLayout.EAST);
+
+        topPanel.revalidate();
+        topPanel.repaint();
+
+        // Ação do botão
+        relatorioButton.addActionListener(e -> {
+            try {
+                int usuarioId = 1; // ID real do usuário
+
+                // Gera o relatório e recebe o caminho do arquivo txt
+                String caminho = relatorioService.gerarRelatorioSemanal(usuarioId);
+
+                // Lê o conteúdo do arquivo
+                String conteudo = new String(java.nio.file.Files.readAllBytes(
+                        java.nio.file.Paths.get(caminho)
+                ));
+
+                // Exibir o conteúdo em uma janela
+                JTextArea txt = new JTextArea(conteudo);
+                txt.setEditable(false);
+                txt.setFont(new Font("Monospaced", Font.PLAIN, 14));
+
+                JScrollPane scroll = new JScrollPane(txt);
+
+                JDialog dialog = new JDialog(frame, "Relatório Semanal", true);
+                dialog.setSize(600, 500);
+                dialog.setLocationRelativeTo(frame);
+                dialog.add(scroll);
+                dialog.setVisible(true);
+
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(frame,
+                        "Erro ao gerar relatório: " + ex.getMessage());
+            }
+        });
+
+
 
         // Para ajustar o tamanho dos botões e fontes do mês/ano
         ((JComboBox<?>) calendar.getMonthChooser().getComboBox())
