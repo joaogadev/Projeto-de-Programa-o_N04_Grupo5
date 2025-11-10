@@ -77,4 +77,5 @@ Mencione todos aqueles que ajudaram a levantar o projeto desde o seu início
 * **Antonio Calu** - [Antonio Calu](https://github.com/antoniocalu).
   
   
-Você também pode ver a lista de todos os [colaboradores](https://github.com/usuario/projeto/colaboradores) que participaram deste projeto.
+Você também pode ver a lista de todos os [colaboradores](https://github.com/joaogadev/Projeto-de-Programa-o_N04_Grupo5/graphs/contributors/) que participaram deste projeto.
+
