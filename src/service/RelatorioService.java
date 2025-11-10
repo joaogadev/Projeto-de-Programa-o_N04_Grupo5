@@ -7,8 +7,11 @@ import java.sql.*;
 import java.time.format.DateTimeFormatter;
 
 public class RelatorioService {
+    // adicionar mensagem para o caso de não tenham eventos que o usuário participou
 
-    public static void gerarRelatorioSemanal(int usuarioId) {
+    public RelatorioService(){}
+
+    public String gerarRelatorioSemanal(int usuarioId) {
         String sql = """
             SELECT e.nome, e.descricao, e.dataInicio, e.dataFim, e.local, e.categoria
             FROM HistoricoEventos h
@@ -18,6 +21,7 @@ public class RelatorioService {
               AND e.dataInicio >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)
             ORDER BY e.dataInicio DESC;
         """;
+        String nomeArquivo = "relatorios/RelatorioEventos_" + usuarioId + ".txt";
 
         try (Connection conexao = MyJDBC.getConnection();
              PreparedStatement stmt = conexao.prepareStatement(sql)) {
@@ -26,7 +30,7 @@ public class RelatorioService {
 
             try (ResultSet rs = stmt.executeQuery()) {
 
-                String nomeArquivo = "relatorios/RelatorioEventos_" + usuarioId + ".txt";
+
 
                 try (BufferedWriter arquivo = new BufferedWriter(new FileWriter(nomeArquivo))) {
 
@@ -68,5 +72,6 @@ public class RelatorioService {
         } catch (SQLException e) {
             System.err.println(e.getMessage());
         }
+        return nomeArquivo;
     }
 }
