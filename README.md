@@ -63,15 +63,13 @@ Adicione notas adicionais sobre como implantar isso em um sistema ativo
 
 ## 🛠️ Construído com
 
-Mencione as ferramentas que você usou para criar seu projeto
+Java 17
 
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - O framework web usado
-* [Maven](https://maven.apache.org/) - Gerente de Dependência
-* [ROME](https://rometools.github.io/rome/) - Usada para gerar RSS
+* JavaFX
+* JDBC
+* MySQL Connector/J
+* IntelliJ IDEA
 
-## 🖇️ Colaborando
-
-Por favor, leia o [COLABORACAO.md](https://gist.github.com/usuario/linkParaInfoSobreContribuicoes) para obter detalhes sobre o nosso código de conduta e o processo para nos enviar pedidos de solicitação.
 
 ## 📌 Versão
 
@@ -100,3 +98,4 @@ Este projeto está sob a licença (sua licença) - veja o arquivo [LICENSE.md](h
 
 ---
 ⌨️ com ❤️ por [Armstrong Lohãns](https://gist.github.com/lohhans) 😊
+
