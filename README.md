@@ -70,7 +70,7 @@ Adicione notas adicionais sobre como implantar isso em um sistema ativo
 
 Mencione todos aqueles que ajudaram a levantar o projeto desde o seu início
 
-* **Um desenvolvedor** - *Trabalho Inicial* - [umdesenvolvedor](https://github.com/linkParaPerfil)
+* **Abraao** - [Abraao](https://github.com/Abraao-works).
 * **Fulano De Tal** - *Documentação* - [fulanodetal](https://github.com/linkParaPerfil)
 
 Você também pode ver a lista de todos os [colaboradores](https://github.com/usuario/projeto/colaboradores) que participaram deste projeto.
@@ -89,6 +89,7 @@ Este projeto está sob a licença (sua licença) - veja o arquivo [LICENSE.md](h
 
 ---
 ⌨️ com ❤️ por [Armstrong Lohãns](https://gist.github.com/lohhans) 😊
+
 
 
 
