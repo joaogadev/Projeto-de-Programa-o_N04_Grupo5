@@ -1,18 +1,18 @@
 package ui;
-
 import com.toedter.calendar.JCalendar;
 import service.AgendaService;
 import model.Evento;
+import service.NotificacaoConfigService;
 import service.RelatorioService;
 
 import javax.swing.*;
 import java.awt.*;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import service.NotificacaoService;
 
 public class AgendaControllerFx {
     private JFrame frame;
@@ -24,6 +24,8 @@ public class AgendaControllerFx {
     public AgendaControllerFx() {
         agendaService = new AgendaService();
         RelatorioService relatorioService = new RelatorioService();
+        NotificacaoService notificacaoService = new NotificacaoService();
+        NotificacaoConfigService configService = new NotificacaoConfigService();
 
         frame = new JFrame("Agenda de Eventos");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -50,7 +52,15 @@ public class AgendaControllerFx {
         JButton relatorioButton = new JButton("Gerar Relatório");
         relatorioButton.setFont(new Font("Arial", Font.BOLD, 14));
 
+        JButton notificacoesButton = new JButton("Notificações");
+        notificacoesButton.setFont(new Font("Arial", Font.BOLD, 14));
+
+        JButton configNotificacoesButton = new JButton("Ativar Notificações");
+        configNotificacoesButton.setFont(new Font("Arial", Font.BOLD, 14));
+
         rightPanel.add(relatorioButton);
+        rightPanel.add(notificacoesButton);
+        rightPanel.add(configNotificacoesButton);
 
         // Remonta o topPanel agora dividido
         topPanel.removeAll();
@@ -60,12 +70,12 @@ public class AgendaControllerFx {
         topPanel.revalidate();
         topPanel.repaint();
 
-        // Ação do botão
+
         relatorioButton.addActionListener(e -> {
             try {
                 int usuarioId = 1; // ID real do usuário
 
-                // Gera o relatório e recebe o caminho do arquivo txt
+
                 String caminho = relatorioService.gerarRelatorioSemanal(usuarioId);
 
                 // Lê o conteúdo do arquivo
@@ -73,7 +83,7 @@ public class AgendaControllerFx {
                         java.nio.file.Paths.get(caminho)
                 ));
 
-                // Exibir o conteúdo em uma janela
+               // Exibição do txy
                 JTextArea txt = new JTextArea(conteudo);
                 txt.setEditable(false);
                 txt.setFont(new Font("Monospaced", Font.PLAIN, 14));
@@ -92,7 +102,31 @@ public class AgendaControllerFx {
             }
         });
 
+        notificacoesButton.addActionListener(e -> {
+          String notificacao = notificacaoService.gerarNotificacao();
+          JOptionPane.showMessageDialog(frame, notificacao, "Notificações", JOptionPane.INFORMATION_MESSAGE);
+        });
 
+        configNotificacoesButton.addActionListener(e -> {
+            boolean atual = configService.estadoNotificacao();
+
+            int opcao = JOptionPane.showConfirmDialog(
+                    frame,
+                    "Deseja receber notificações automáticas ao abrir o sistema?",
+                    "Configurar Notificações",
+                    JOptionPane.YES_NO_OPTION
+            );
+
+            boolean ativado = (opcao == JOptionPane.YES_OPTION);
+            configService.setNotificacaoAtivada(ativado);
+
+            JOptionPane.showMessageDialog(
+                    frame,
+                    ativado ?
+                            "Notificações automáticas ativadas!" :
+                            "Notificações automáticas desativadas."
+            );
+        });
 
         // Para ajustar o tamanho dos botões e fontes do mês/ano
         ((JComboBox<?>) calendar.getMonthChooser().getComboBox())
@@ -131,6 +165,20 @@ public class AgendaControllerFx {
         atualizarCoresDias();
 
         frame.setVisible(true);
+        // Exibir notificação automática ao abrir o sistema
+        if (configService.estadoNotificacao()) {
+            String msg = notificacaoService.gerarNotificacao();
+
+            if (!msg.contains("Nenhum evento")) {
+                JOptionPane.showMessageDialog(
+                        frame,
+                        msg,
+                        "Notificação Automática",
+                        JOptionPane.INFORMATION_MESSAGE
+                );
+            }
+        }
+
     }
 
     private void atualizarEventos() {
