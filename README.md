@@ -2,11 +2,6 @@
 
 Um parágrafo da descrição do projeto vai aqui
 
-## 🚀 Começando
-
-Essas instruções permitirão que você obtenha uma cópia do projeto em operação na sua máquina local para fins de desenvolvimento e teste.
-
-Consulte **[Implantação](#-implanta%C3%A7%C3%A3o)** para saber como implantar o projeto.
 
 ### 📋 Pré-requisitos
 
@@ -21,40 +16,16 @@ De que coisas você precisa para instalar o software e como instalá-lo?
 
 ### 🔧 Instalação
 
-Dê 
+Execute no terminal do projeto
 ```
 git clone https://github.com/joaogadev/Projeto-de-Programa-o_N04_Grupo5.git
 ```
-no terminal do projeto
 Se estiver utilizando o intellij, execute as bibliotecas, seguindo o passo a passo
 Vá em file -> Project Structure -> Modules -> Dependencies -> Clique no sinal de mais e adicione o MySQL connector e o jcalendar -> Marque a checkbox -> Apply
 Na classe 'src/repository/MyJDBC.java', no atributo password, dentro das aspas, altere para a sua password do MySQL WorkBench. 
 Utilize o script em 'src/resources/SCHEMA.sql' no seu MySQL WorkBench e rode-o. 
 Após isso va até a classe 'src/Main.java' e rode o programa.
 
-## ⚙️ Executando os testes
-
-Explicar como executar os testes automatizados para este sistema.
-
-### 🔩 Analise os testes de ponta a ponta
-
-Explique que eles verificam esses testes e porquê.
-
-```
-Dar exemplos
-```
-
-### ⌨️ E testes de estilo de codificação
-
-Explique que eles verificam esses testes e porquê.
-
-```
-Dar exemplos
-```
-
-## 📦 Implantação
-
-Adicione notas adicionais sobre como implantar isso em um sistema ativo
 
 ## 🛠️ Construído com
 
@@ -78,4 +49,5 @@ Mencione todos aqueles que ajudaram a levantar o projeto desde o seu início
   
   
 Você também pode ver a lista de todos os [colaboradores](https://github.com/joaogadev/Projeto-de-Programa-o_N04_Grupo5/graphs/contributors/) que participaram deste projeto.
+
 
