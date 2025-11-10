@@ -21,21 +21,18 @@ De que coisas você precisa para instalar o software e como instalá-lo?
 
 ### 🔧 Instalação
 
-Uma série de exemplos passo-a-passo que informam o que você deve executar para ter um ambiente de desenvolvimento em execução.
-
-Diga como essa etapa será:
-
-```
-Dar exemplos
-```
-
-E repita:
-
-```
-Até finalizar
-```
-
-Termine com um exemplo de como obter dados do sistema ou como usá-los para uma pequena demonstração.
+Dê 'git clone https://github.com/joaogadev/Projeto-de-Programa-o_N04_Grupo5.git' no terminal do projeto
+Se estiver utilizando o intellij, execute as bibliotecas, seguindo o passo a passo
+  1 - Vá em file
+  2 - Project Structure
+  3 - Modules
+  4 - Dependencies
+  5 - Clique no sinal de mais e adicione o MySQL connector e o jcalendar 
+  6 - Marque a checkbox
+  7 - Apply
+Na classe 'src/repository/MyJDBC.java', no atributo password, dentro das aspas, altere para a sua password do MySQL WorkBench. 
+Utilize o script em 'src/resources/SCHEMA.sql' no seu MySQL WorkBench e rode-o. 
+Após isso va até a classe 'src/Main.java' e rode o programa.
 
 ## ⚙️ Executando os testes
 
@@ -94,5 +91,6 @@ Este projeto está sob a licença (sua licença) - veja o arquivo [LICENSE.md](h
 
 ---
 ⌨️ com ❤️ por [Armstrong Lohãns](https://gist.github.com/lohhans) 😊
+
 
 
