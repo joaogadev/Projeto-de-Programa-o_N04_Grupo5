@@ -63,17 +63,13 @@ Adicione notas adicionais sobre como implantar isso em um sistema ativo
 
 ## 🛠️ Construído com
 
-Java 17
-
+* Java 17
 * JavaFX
+* JavaCalendar
 * JDBC
 * MySQL Connector/J
 * IntelliJ IDEA
 
-
-## 📌 Versão
-
-Nós usamos [SemVer](http://semver.org/) para controle de versão. Para as versões disponíveis, observe as [tags neste repositório](https://github.com/suas/tags/do/projeto). 
 
 ## ✒️ Autores
 
@@ -98,4 +94,5 @@ Este projeto está sob a licença (sua licença) - veja o arquivo [LICENSE.md](h
 
 ---
 ⌨️ com ❤️ por [Armstrong Lohãns](https://gist.github.com/lohhans) 😊
+
 
