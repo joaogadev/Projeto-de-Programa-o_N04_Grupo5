@@ -71,8 +71,12 @@ Adicione notas adicionais sobre como implantar isso em um sistema ativo
 Mencione todos aqueles que ajudaram a levantar o projeto desde o seu início
 
 * **Abraao** - [Abraao](https://github.com/Abraao-works).
-* **Fulano De Tal** - *Documentação* - [fulanodetal](https://github.com/linkParaPerfil)
-
+* **João Gabriel** - [Joao-Gabriel]([https://github.com/Abraao-works](https://github.com/joaogadev)).
+* **João Pedro Weber** - [João Pedro](https://github.com/JoaoPedroWeber).
+* **João Guilherme** - [João Guilherme](https://github.com/joa576).
+* * **Antonio Calu** - [Antonio Calu](https://github.com/antoniocalu).
+  
+  
 Você também pode ver a lista de todos os [colaboradores](https://github.com/usuario/projeto/colaboradores) que participaram deste projeto.
 
 ## 📄 Licença
@@ -89,6 +93,7 @@ Este projeto está sob a licença (sua licença) - veja o arquivo [LICENSE.md](h
 
 ---
 ⌨️ com ❤️ por [Armstrong Lohãns](https://gist.github.com/lohhans) 😊
+
 
 
 
