@@ -87,14 +87,42 @@ public class EventoRepository {
         return buscarEventos();
     }
 
-    public List<Evento> buscarPorData(java.sql.Date data) {
+    public List<Evento> listarPorUsuario(int usuarioId) {
+        List<Evento> eventos = new ArrayList<>();
+        String sql = "SELECT * FROM Evento WHERE usuario_id = ?";
+
+        try (Connection conexao = MyJDBC.getConnection();
+        PreparedStatement stmt = conexao.prepareStatement(sql)) {
+            stmt.setInt(1, usuarioId);
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                Evento evento= new Evento();
+                evento.setId(rs.getInt("Evento_id"));
+                evento.setNome(rs.getString("nome"));
+                evento.setDescricao(rs.getString("descricao"));
+                evento.setDataInicio(rs.getTimestamp("dataInicio").toLocalDateTime());
+                evento.setDataFim(rs.getTimestamp("dataFim").toLocalDateTime());
+                evento.setLocal(rs.getString("local"));
+                evento.setCategoria(rs.getString("categoria"));
+                evento.setStatus(rs.getString("status"));
+                eventos.add(evento);
+            }
+        } catch (SQLException e) {
+            System.err.println("Erro ao listar eventos do usuário: " + e.getMessage());
+            e.printStackTrace();
+        }
+        return eventos;
+    }
+
+    public List<Evento> buscarPorData(java.sql.Timestamp data) {
         List<Evento> eventos = new ArrayList<>();
         String sql = "SELECT * FROM Evento WHERE DATE(dataInicio) = ?";
 
         try (Connection conn = MyJDBC.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-            stmt.setDate(1, data);
+            stmt.setTimestamp(1, data);
             ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
