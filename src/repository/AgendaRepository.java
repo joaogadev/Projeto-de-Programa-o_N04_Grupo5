@@ -17,7 +17,9 @@ public class AgendaRepository {
 
     /* verifica se já existe evento no mesmo local e mesmo horário d einício*/
     public boolean estaOcupado(LocalDateTime dataInicio, String local) throws SQLException{
+
         String sql = "SELECT Evento_id FROM Evento WHERE dataInicio = ? AND Local = ? AND status = 'Ativo'";
+
         try (PreparedStatement ps = con.prepareStatement(sql)) {
             ps.setTimestamp(1, Timestamp.valueOf(dataInicio)); //LocalDateTime pata Timestamp
             ps.setString(2, local);
@@ -42,6 +44,7 @@ public class AgendaRepository {
             while (rs.next()) {
                 Evento ev = new Evento();
                 ev.setId(rs.getInt("Evento_id"));
+                ev.setAdmin(rs.getInt("Admin_id"));
                 ev.setNome(rs.getString("nome"));
                 ev.setDataInicio(rs.getTimestamp("dataInicio").toLocalDateTime());
                 ev.setDataFim(rs.getTimestamp("dataFim").toLocalDateTime());
