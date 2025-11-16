@@ -1,5 +1,7 @@
 package repository;
 import model.Evento;
+
+import java.io.IOException;
 import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -75,9 +77,24 @@ public class EventoRepository {
     }
     public List<Evento> listarTodos() {return findAll();}
 
+    // listar eventos em que o usuário está inscrito com status Confirmado
     public List<Evento> listarPorUsuario(int usuarioId) {
         List<Evento> eventos = new ArrayList<>();
-        String sql = "SELECT * FROM Evento WHERE usuario_id = ?";
+
+        String sql = """
+                SELECT e.Evento_id,
+                    e.Admin_id,
+                    e.nome ,
+                    e.descricao,
+                    e.dataInicio,
+                    e.dataFim,
+                    e.local,
+                    e.categoria,
+                    i.status
+                FROM Inscricao i
+                JOIN Evento e ON i.Evento_id = e.Evento_id
+                WHERE i.Usuario_id = ? and i.status = "Confirmado";
+                """;
 
         try (Connection conexao = MyJDBC.getConnection();
         PreparedStatement stmt = conexao.prepareStatement(sql)) {
@@ -113,6 +130,7 @@ public class EventoRepository {
         }
         return eventos;
     }
+    // mostrar todos os eventos apenas com filtro por dia
     public List<Evento>  encontrarDias(LocalDate data){
         List<Evento> eventos = new ArrayList<>();
         String sql = "SELECT * FROM Evento WHERE DATE(dataInicio) = ? ORDER BY dataInicio";
@@ -131,6 +149,7 @@ public class EventoRepository {
         }
         return eventos;
     }
+
     public List<Evento> econtrarSemanas(LocalDate data){
         List<Evento> eventos = new ArrayList<>();
         String sql = "SELECT * FROM Evento WHERE YEARWEEK(dataInicio, 1) = YEARWEEK(?, 1) ORDER BY dataInicio";
@@ -169,8 +188,8 @@ public class EventoRepository {
         }
         return eventos;
     }
-    // metodo auxilar
-    private Evento mapResultSetEvento(ResultSet rs) throws SQLException{
+    // metodo auxilar cadastro
+    public Evento mapResultSetEvento(ResultSet rs) throws SQLException{
         Evento e = new Evento();
         e.setId(rs.getInt("Evento_id"));
         e.setAdmin(rs.getInt("Admin_id"));
