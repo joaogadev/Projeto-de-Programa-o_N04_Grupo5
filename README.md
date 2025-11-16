@@ -5,8 +5,6 @@ Um parágrafo da descrição do projeto vai aqui
 
 ### 📋 Pré-requisitos
 
-De que coisas você precisa para instalar o software e como instalá-lo?
-
 ✅ Java 17 LTS ou superior  
 ✅ JavaFX (módulos: javafx-controls, javafx-fxml, javafx-graphics, javafx-base)  
 ✅ MySQL Server (versão 8 ou superior)  
@@ -39,8 +37,6 @@ Após isso va até a classe 'src/Main.java' e rode o programa.
 
 ## ✒️ Autores
 
-Mencione todos aqueles que ajudaram a levantar o projeto desde o seu início
-
 * **Abraao** - [Abraao](https://github.com/Abraao-works).
 * **João Gabriel** - [Joao-Gabriel](https://github.com/joaogadev).
 * **João Pedro Weber** - [João Pedro](https://github.com/JoaoPedroWeber).
@@ -48,7 +44,8 @@ Mencione todos aqueles que ajudaram a levantar o projeto desde o seu início
 * **Antonio Calu** - [Antonio Calu](https://github.com/antoniocalu).
   
   
-Você também pode ver a lista de todos os [colaboradores](https://github.com/joaogadev/Projeto-de-Programa-o_N04_Grupo5/graphs/contributors/) que participaram deste projeto.
+[colaboradores](https://github.com/joaogadev/Projeto-de-Programa-o_N04_Grupo5/graphs/contributors/) que participaram deste projeto.
+
 
 
 
