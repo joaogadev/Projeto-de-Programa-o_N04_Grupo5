@@ -3,15 +3,17 @@ package service;
 import model.Evento;
 import repository.EventoRepository;
 import java.sql.Timestamp;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.sql.Date;
 import java.util.List;
-import java.sql.Date;
 
 public class EventoService {
-    private EventoRepository eventoRepository = new EventoRepository();
+    private final EventoRepository eventoRepository;
+
+    public EventoService(){
+        this.eventoRepository = new EventoRepository();
+    }
 
     public boolean cadastrarEvento (Evento novoEvento, int usuarioId) {
         try {
@@ -30,7 +32,7 @@ public class EventoService {
     }
 
 
-    public boolean temConflito(LocalDateTime dataInicio, LocalDateTime dataFim, int usuarioId) {
+    private boolean temConflito(LocalDateTime dataInicio, LocalDateTime dataFim, int usuarioId) {
         try {
             List<Evento> eventosUsuario = eventoRepository.listarPorUsuario(usuarioId);
             for (Evento e : eventosUsuario){
