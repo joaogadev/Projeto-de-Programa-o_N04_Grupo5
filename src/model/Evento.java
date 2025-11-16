@@ -1,12 +1,10 @@
 package model;
-import java.time.LocalDate;
-
 import java.time.LocalDateTime;
-import java.util.Date;
 
 
 public class Evento {
     private int id;
+    private int admi_id;
     private String nome;
     private String descricao;
     private LocalDateTime dataInicio;
@@ -14,13 +12,10 @@ public class Evento {
     private String local;
     private String categoria;
     private String status;
-    private Usuario admin;
-
-
 
   public Evento(){
   }
-  public Evento(int id, String nome, String descricao, LocalDateTime dataInicio, LocalDateTime dataFim, String local, String categoria, String status, Usuario admin) {
+  public Evento(int id, String nome, String descricao, LocalDateTime dataInicio, LocalDateTime dataFim, String local, String categoria, String status, int admin) {
       this.id = id;
       this.nome = nome;
       this.descricao = descricao;
@@ -29,7 +24,7 @@ public class Evento {
       this.local = local;
       this.categoria = categoria;
       this.status = status;
-      this.admin = admin;
+      this.admi_id = admin;
     }
 
     public int getId() {
@@ -88,12 +83,12 @@ public class Evento {
         this.categoria = categoria;
     }
 
-    public Usuario getAdmin() {
-        return admin;
+    public int getAdmin() {
+        return admi_id;
     }
 
-    public void setAdmin(Usuario admin) {
-        this.admin = admin;
+    public void setAdmin(int admin) {
+        this.admi_id = admin;
     }
 
     public String getStatus() {
@@ -107,6 +102,7 @@ public class Evento {
     public String toString() {
         return "\n--- EVENTO ---" +
                 "\nID: " + id +
+                "\nadmi_id: " + admi_id +
                 "\nNome: " + nome +
                 "\nDescrição: " + descricao +
                 "\nLocal: " + local +

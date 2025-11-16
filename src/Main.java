@@ -1,7 +1,9 @@
-import ui.AgendaControllerFx;
+import ui.AgendaControl;
+import ui.AgendaView;
+
 public class Main {
     public static void main(String[] args) {
-        AgendaControllerFx agendaControllerFx = new AgendaControllerFx();
-
+        AgendaView a = new AgendaView();
+        AgendaControl ag = new AgendaControl(a);
     }
 }
