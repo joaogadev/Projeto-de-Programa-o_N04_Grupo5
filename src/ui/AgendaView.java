@@ -13,7 +13,6 @@ public class AgendaView extends JFrame{
     private final JCalendar calendar;
     private final JTextArea eventosTextArea; // exibição de txt
     private final JButton relatorioButton;
-    private final JButton notificacoesButton;
     private final JButton configNotificacoesButton;
 
     public AgendaView(){
@@ -28,7 +27,7 @@ public class AgendaView extends JFrame{
         this.calendar = new JCalendar();
         this.eventosTextArea = new JTextArea();
         this.relatorioButton = new JButton("Gerar Relatório");
-        this.notificacoesButton = new JButton("Notificações");
+        //this.notificacoesButton = new JButton("Notificações");
         this.configNotificacoesButton = new JButton("Ativar Notificações");
 
         // montar ui
@@ -50,7 +49,6 @@ public class AgendaView extends JFrame{
         JPanel rightPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
 
         rightPanel.add(relatorioButton);
-        rightPanel.add(notificacoesButton);
         rightPanel.add(configNotificacoesButton);
 
         // Remonta o topPanel agora dividido
@@ -72,7 +70,7 @@ public class AgendaView extends JFrame{
         Font fonteBotoes = new Font("Arial", Font.BOLD, 14);
 
         relatorioButton.setFont(fonteBotoes);
-        notificacoesButton.setFont(fonteBotoes);
+        //notificacoesButton.setFont(fonteBotoes);
         configNotificacoesButton.setFont(fonteBotoes);
 
         // estilo principal do calendário
@@ -148,10 +146,6 @@ public class AgendaView extends JFrame{
 
     public JButton getRelatorioButton() {
         return relatorioButton;
-    }
-
-    public JButton getNotificacoesButton() {
-        return notificacoesButton;
     }
 
     public JButton getConfigNotificacoesButton() {

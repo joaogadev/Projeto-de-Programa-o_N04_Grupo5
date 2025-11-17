@@ -1,5 +1,6 @@
 package ui;
 import model.Evento;
+import model.Usuario;
 import service.AgendaService;
 import service.NotificacaoConfigService;
 import service.NotificacaoService;
@@ -18,7 +19,8 @@ public class AgendaControl {
     private final RelatorioService relatorioService;
     private final NotificacaoService notificacaoService;
     private final NotificacaoConfigService configService;
-    private final int usuarioId = 6; // ID do usuário logado
+    private Usuario usuario;
+
 
     public AgendaControl(AgendaView agendaView) {
         this.agendaView = agendaView;
@@ -29,9 +31,21 @@ public class AgendaControl {
         this.notificacaoService = new NotificacaoService();
         this.configService = new NotificacaoConfigService();
 
-        // Configura os listeners da View
         listeners();
+        // Inicializa a View
+        incializaAgendaView();
+    }
+    // contrutor para usuário logado
+    public AgendaControl(AgendaView agendaView, Usuario usuario) {
+        this.usuario = usuario;
+        this.agendaView = agendaView;
+        // Inicialização das dependências (Services)
+        this.agendaService = new AgendaService();
+        this.relatorioService = new RelatorioService();
+        this.notificacaoService = new NotificacaoService();
+        this.configService = new NotificacaoConfigService();
 
+        listeners();
         // Inicializa a View
         incializaAgendaView();
     }
@@ -51,7 +65,6 @@ public class AgendaControl {
 
         // Listeners dos Botões
         agendaView.getRelatorioButton().addActionListener(e -> gerarRelatorio());
-        agendaView.getNotificacoesButton().addActionListener(e -> onNotificacoesClicked());
         agendaView.getConfigNotificacoesButton().addActionListener(e -> configNotificacoesClicado());
     }
 
@@ -61,14 +74,14 @@ public class AgendaControl {
         atualizarEventos();
         atualizarCoresDias();
         agendaView.setVisible(true);
-        /*
+
         // Exibir notificação automática ao abrir o sistema
         if (configService.estadoNotificacao()) {
-            String msg = notificacaoService.gerarNotificacao();
+            String msg = notificacaoService.gerarNotificacao(usuario.getId());
             if (!msg.contains("Nenhum evento")) {
-                view.exibirMensagem(msg, "Notificação Automática", JOptionPane.INFORMATION_MESSAGE);
+                agendaView.exibirMensagem(msg, "Notificação Automática", JOptionPane.INFORMATION_MESSAGE);
             }
-        }*/
+        }
     }
 
     //Busca os eventos para a data selecionada e atualiza a área de texto da View.
@@ -121,7 +134,7 @@ public class AgendaControl {
     private void gerarRelatorio() {
         try {
 
-            String caminho = relatorioService.gerarRelatorioSemanal(this.usuarioId);
+            String caminho = relatorioService.gerarRelatorioSemanal(usuario.getId());
 
             //Apresentação (Leitura do arquivo e exibição)
             String conteudo = new String(java.nio.file.Files.readAllBytes(
@@ -139,27 +152,57 @@ public class AgendaControl {
     }
 
     private void onNotificacoesClicked() {
+        Integer userid = getUsuarioId();
+        String notificacao;
 
-        String notificacao = notificacaoService.gerarNotificacao(this.usuarioId);
-
-        // Atualiza a View
-        agendaView.exibirMensagem(notificacao, "Notificações", JOptionPane.INFORMATION_MESSAGE);
+        if(userid != null){
+            // usuario logado
+            notificacao = notificacaoService.gerarNotificacao(usuario.getId());
+        }else{
+            agendaView.exibirMensagem(
+                    "Você precisa estar logado para ver notificações.",
+                    "Usuário não logado",
+                    JOptionPane.WARNING_MESSAGE
+            );
+        }
     }
 
     private void configNotificacoesClicado() {
-        // Pergunta ao usuário
-        int opcao = agendaView.exibirConfirmacao(
-                "Deseja receber notificações automáticas ao abrir o sistema?",
-                "Configurar Notificações"
-        );
+        Integer user_id = getUsuarioId();
 
-        boolean ativado = (opcao == JOptionPane.YES_OPTION);
+        if(user_id == null){
+            agendaView.exibirMensagem(
+                    "Você precisa estar logado para ver notificações.",
+                    "Usuário não logado",
+                    JOptionPane.WARNING_MESSAGE
+            );
+        }else {
+            // Pergunta ao usuário
+            int opcao = agendaView.exibirConfirmacao(
+                    "Deseja receber notificações automáticas ao abrir o sistema?",
+                    "Configurar Notificações"
+            );
 
-        configService.setNotificacaoAtivada(ativado);
+            boolean ativado = (opcao == JOptionPane.YES_OPTION);
 
-        String mensagem = ativado ?
-                "Notificações automáticas ativadas!" :
-                "Notificações automáticas desativadas.";
-        agendaView.exibirMensagem(mensagem, "Configuração", JOptionPane.INFORMATION_MESSAGE);
+            configService.setNotificacaoAtivada(ativado);
+
+            if (ativado) {
+                String mensagem = notificacaoService.gerarNotificacao(usuario.getId());
+
+                if (!mensagem.contains("Sem eventos")) {
+                    agendaView.exibirMensagem(mensagem, "Notificação imediata (24h)", JOptionPane.INFORMATION_MESSAGE);
+                }
+            }
+            String mensagem = ativado ?
+                    "Notificações automáticas ativadas!" :
+                    "Notificações automáticas desativadas.";
+            agendaView.exibirMensagem(mensagem, "Configuração", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }
+
+    // metodo auxiliar
+    private Integer getUsuarioId(){
+        return usuario != null ? usuario.getId() : null; // se usuário for diferente de nullo retorne o id, se não retorne nulo
     }
 }
