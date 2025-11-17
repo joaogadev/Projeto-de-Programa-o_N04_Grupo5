@@ -2,6 +2,7 @@ package repository;
 
 import model.Evento;
 import model.Inscricao;
+import model.Usuario;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -9,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class InscricaoRepository {
     private final EventoRepository eventoRepository;
@@ -35,7 +37,6 @@ public class InscricaoRepository {
                 JOIN Evento e ON i.Evento_id = e.Evento_id
                 WHERE i.Usuario_id = ? and i.status = "Confirmado";
                 """;
-
         try (Connection conexao = MyJDBC.getConnection();
              PreparedStatement stmt = conexao.prepareStatement(sql)) {
 
@@ -51,4 +52,28 @@ public class InscricaoRepository {
         }
         return eventos;
     }
+    public String inscrever(Evento evento, Usuario usuario) {
+        String sql = "INSERT INTO inscricao " +
+                "(Usuario_id, Evento_id, status, dataInscricao, descricao, tipo) " +
+                "VALUES (?, ?, ?, ?, ?, ?)";
+
+        try (Connection conn = MyJDBC.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, usuario.getId());
+            stmt.setInt(2, evento.getId());
+            stmt.setString(3, "INSCRITO");  // exemplo de status
+            stmt.setDate(4, new java.sql.Date(System.currentTimeMillis()));
+            stmt.setString(5, "Inscrição pelo sistema");
+            stmt.setString(6, "NORMAL");
+
+            stmt.executeUpdate();
+            return "A inscrição foi bem-sucedida!";
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return "Ocorreu um erro na inscrição ";
+        }
+    }
+
 }

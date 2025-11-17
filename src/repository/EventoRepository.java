@@ -54,7 +54,6 @@ public class EventoRepository {
         }
     }
 
-
     public boolean remover(int id) {
         String sql = "DELETE FROM Evento WHERE Evento_id = ?";
 
