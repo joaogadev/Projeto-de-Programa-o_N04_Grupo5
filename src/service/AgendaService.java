@@ -1,5 +1,6 @@
 package service;
 
+import jdk.jfr.Event;
 import model.Evento;
 import repository.EventoRepository;
 import java.time.LocalDate;
@@ -28,6 +29,7 @@ public class AgendaService {
         return eventoRepository.econtrarMeses(mes, ano);
     }
 
+    public List<Evento> filtrarPorUsuario(int usuario_id){return eventoRepository.listarPorUsuario(usuario_id);}
     /*
     public static void main(String[] args) {
         AgendaService service = new AgendaService();

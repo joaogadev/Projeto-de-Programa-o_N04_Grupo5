@@ -2,12 +2,10 @@ package service;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.sql.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import model.Evento;
-import repository.EventoRepository;
 import repository.RelatorioRepository;
 
 public class RelatorioService {

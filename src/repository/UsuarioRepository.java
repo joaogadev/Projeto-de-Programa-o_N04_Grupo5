@@ -62,7 +62,7 @@ public class UsuarioRepository {
     }
 
     /* Lista todos os usuarios */
-    public List<Usuario> listarTodos() throws SQLException {
+    public List<Usuario> listarTodos()  {
         List<Usuario> usuarios = new ArrayList<>();
         String sql = "SELECT * FROM Usuario";
 
@@ -73,6 +73,8 @@ public class UsuarioRepository {
             while (rs.next()) {
                 usuarios.add(mapearUsuario(rs, conn));
             }
+        }catch (SQLException e){
+            e.printStackTrace();
         }
         return usuarios;
     }

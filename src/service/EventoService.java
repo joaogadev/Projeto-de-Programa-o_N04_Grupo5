@@ -31,7 +31,10 @@ public class EventoService {
         }
     }
 
-
+    /**
+     * @param dataInicio pega data de início de um novo evento a ser inserido para comprar com outros eventos de incrição
+     * @param dataFim o mesmo mas para o fim
+     */
     private boolean temConflito(LocalDateTime dataInicio, LocalDateTime dataFim, int usuarioId) {
         try {
             List<Evento> eventosUsuario = eventoRepository.listarPorUsuario(usuarioId);
@@ -46,16 +49,6 @@ public class EventoService {
             e.printStackTrace();
         }
         return false;
-    }
-
-    public List<Evento> listarEventos() {
-        try {
-            return eventoRepository.listarTodos();
-        } catch (Exception e) {
-            System.err.println("Erro ao listar eventos: " + e.getMessage());
-            e.printStackTrace();
-            return new ArrayList<>();
-        }
     }
 
     public List<Evento> filtrarPorCategoria(String categoria) {
