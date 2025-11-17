@@ -1,9 +1,11 @@
+import jdk.jfr.Event;
+import model.Evento;
 import model.Usuario;
 import service.EventoService;
 import service.UsuarioService;
-import ui.AgendaControl;
 import ui.AgendaView;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public class Main {
@@ -21,6 +23,20 @@ public class Main {
         //AgendaControl ag = new AgendaControl(a);
 
         //usuario logado
-        AgendaControl b = new AgendaControl(a, user);
+        //AgendaControl b = new AgendaControl(a, user);
+
+        // fitros de eventos
+        /*
+        String local = "São Paulo - SP";
+        List<Evento> eventosLocal = eventoService.filtrarPorLocal(local);
+        for(int i = 0; i < eventosLocal.size(); i++){
+            System.out.println(eventosLocal.get(i).toString());
+        }
+
+        String categoria = "Tecnologia";
+        List<Evento> eventosCategoria = eventoService.filtrarPorCategoria(categoria);
+        for (Evento e : eventosCategoria){
+            System.out.println(e.toString());
+        }*/
     }
 }

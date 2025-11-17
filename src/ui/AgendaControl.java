@@ -75,11 +75,18 @@ public class AgendaControl {
         atualizarCoresDias();
         agendaView.setVisible(true);
 
-        // Exibir notificação automática ao abrir o sistema
-        if (configService.estadoNotificacao()) {
-            String msg = notificacaoService.gerarNotificacao(usuario.getId());
-            if (!msg.contains("Nenhum evento")) {
-                agendaView.exibirMensagem(msg, "Notificação Automática", JOptionPane.INFORMATION_MESSAGE);
+        Integer userid = getUsuarioId();
+        String notificacao;
+
+        if(userid == null){
+            return;
+        }else {
+            // Exibir notificação automática ao abrir o sistema
+            if (configService.estadoNotificacao()) {
+                String msg = notificacaoService.gerarNotificacao(usuario.getId());
+                if (!msg.contains("Nenhum evento")) {
+                    agendaView.exibirMensagem(msg, "Notificação Automática", JOptionPane.INFORMATION_MESSAGE);
+                }
             }
         }
     }
@@ -88,15 +95,19 @@ public class AgendaControl {
     private void atualizarEventos() {
         Date dataSelecionada = agendaView.getCalendar().getDate();
         LocalDate localDate = dataSelecionada.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        Integer userid = getUsuarioId();
 
-        // Busca os eventos
-        List<Evento> eventos = agendaService.filtrarPorDia(localDate);
+        if(userid == null) {
+            // Busca os eventos
+            List<Evento> eventos = agendaService.filtrarPorDia(localDate);
+            // Atualiza a View
+            agendaView.exibirEventos(eventos, localDate);
+        }else{
+            List<Evento> eventos = agendaService.filtrarPorUsuario(usuario.getId());
 
-        // caso tenha um usuário logado use .filtrarPorusuario abaixo
-        // List<Evento> eventos = agendaService.filtrarPorUsuario(this.usuarioId);
-
-        // Atualiza a View
-        agendaView.exibirEventos(eventos, localDate);
+            // Atualiza a View
+            agendaView.exibirEventos(eventos, localDate);
+        }
     }
 
 
@@ -132,22 +143,33 @@ public class AgendaControl {
 
     // handlers de eventos na view
     private void gerarRelatorio() {
-        try {
+        Integer userid = getUsuarioId();
+        String notificacao;
 
-            String caminho = relatorioService.gerarRelatorioSemanal(usuario.getId());
+        if(userid == null){
+            agendaView.exibirMensagem(
+                    "Você precisa estar logado para ver o relatório.",
+                    "Usuário não logado",
+                    JOptionPane.WARNING_MESSAGE
+            );
+        }else {
+            try {
 
-            //Apresentação (Leitura do arquivo e exibição)
-            String conteudo = new String(java.nio.file.Files.readAllBytes(
-                    java.nio.file.Paths.get(caminho)
-            ));
+                String caminho = relatorioService.gerarRelatorioSemanal(usuario.getId());
 
-            // Atualiza a View
-            agendaView.exibirRelatorio(conteudo);
+                //Apresentação (Leitura do arquivo e exibição)
+                String conteudo = new String(java.nio.file.Files.readAllBytes(
+                        java.nio.file.Paths.get(caminho)
+                ));
 
-        } catch (Exception ex) {
-            // Trata o erro e exibe na View
-            agendaView.exibirMensagem("Erro ao gerar relatório: " + ex.getMessage(),
-                    "Erro", JOptionPane.ERROR_MESSAGE);
+                // Atualiza a View
+                agendaView.exibirRelatorio(conteudo);
+
+            } catch (Exception ex) {
+                // Trata o erro e exibe na View
+                agendaView.exibirMensagem("Erro ao gerar relatório: " + ex.getMessage(),
+                        "Erro", JOptionPane.ERROR_MESSAGE);
+            }
         }
     }
 
