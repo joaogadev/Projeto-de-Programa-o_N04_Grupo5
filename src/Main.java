@@ -1,4 +1,5 @@
 import model.Usuario;
+import repository.EventoRepository;
 import service.EventoService;
 import service.UsuarioService;
 import ui.AgendaControl;
@@ -13,7 +14,6 @@ public class Main {
 
         List<Usuario> usuarios = usuarioService.listarTodos();
         Usuario user = usuarios.get(7);
-
         // teste da ui
         AgendaView a = new AgendaView();
 
