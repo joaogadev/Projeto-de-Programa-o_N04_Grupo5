@@ -4,6 +4,7 @@ import model.Usuario;
 import service.EventoService;
 import service.UsuarioService;
 import ui.AgendaView;
+import ui.AgendaControl;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -23,7 +24,7 @@ public class Main {
         //AgendaControl ag = new AgendaControl(a);
 
         //usuario logado
-        //AgendaControl b = new AgendaControl(a, user);
+        AgendaControl b = new AgendaControl(a, user);
 
         // fitros de eventos
         /*
