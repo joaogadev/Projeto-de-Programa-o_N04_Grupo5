@@ -86,4 +86,14 @@ public class EventoService {
             return new ArrayList<>();
         }
     }
+
+    public List<Evento> filtrarPorLocal(String local) {
+        try {
+            return eventoRepository.filtrarPorLocal(local);
+        } catch (Exception e) {
+            System.err.println("Erro ao filtrar eventos por local: " + e.getMessage());
+            e.printStackTrace();
+            return new ArrayList<>();
+        }
+    }
 }

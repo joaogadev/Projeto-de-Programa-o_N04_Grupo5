@@ -131,6 +131,28 @@ public class EventoRepository {
         }
         return eventos;
     }
+
+    public List<Evento> filtrarPorLocal(String local) {
+        List<Evento> eventos= new ArrayList<>();
+        String sql = "SELECT * FROM Evento WHERE local LIKE ? ORDER BY dataInicio";
+
+        try (Connection conexao = MyJDBC.getConnection();
+             PreparedStatement stmt= conexao.prepareStatement(sql)) {
+
+            stmt.setString(1, "%" + local + "%");
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                eventos.add(mapResultSetEvento(rs));
+            }
+
+        } catch (SQLException e) {
+            System.err.println("Erro ao filtrar evento por local: " + e.getMessage());
+            e.printStackTrace();
+        }
+        return eventos;
+    }
+
     // mostrar todos os eventos apenas com filtro por dia
     public List<Evento>  encontrarDias(LocalDate data){
         List<Evento> eventos = new ArrayList<>();
