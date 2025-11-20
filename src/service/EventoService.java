@@ -1,3 +1,7 @@
+// evitar conflitos de horários
+// filtrar eventos
+// listar eventos
+
 package service;
 
 import model.Evento;

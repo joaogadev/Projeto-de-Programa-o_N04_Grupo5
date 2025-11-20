@@ -1,7 +1,6 @@
 package repository;
 
 import model.Evento;
-import model.Inscricao;
 import model.Usuario;
 
 import java.sql.Connection;

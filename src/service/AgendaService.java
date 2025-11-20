@@ -1,3 +1,7 @@
+// mostrar agenda -- FEITO (ou não)
+// lidar com os filtros de dia, semana e mês
+// conetar com evento service para puxar os dados
+
 package service;
 
 import jdk.jfr.Event;

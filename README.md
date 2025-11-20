@@ -1,6 +1,6 @@
 # Projeto-de-Programa-o_N04_Grupo5
 
-Um parágrafo da descrição do projeto vai aqui
+Gerenciar a criação, organização e visualização de eventos, controlando horários, locais e prevenindo conflitos de agenda, garantindo que a programação geral do sistema seja consistente e acessível aos usuários.
 
 
 ### 📋 Pré-requisitos

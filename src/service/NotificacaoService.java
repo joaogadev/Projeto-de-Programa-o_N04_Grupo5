@@ -1,3 +1,6 @@
+// criar lembretes (agendar lembretes)
+// metodo enviar notificação
+
 package service;
 import jdk.jfr.Event;
 import model.Evento;
@@ -80,4 +83,12 @@ public class NotificacaoService {
         return eventosProximos.toString();
     }
 
+
+    public void enviarNotificacao(){
+
+    }
+
+    public void criarLembretes(){
+        
+    }
 }
