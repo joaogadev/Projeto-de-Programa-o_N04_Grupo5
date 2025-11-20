@@ -1,0 +1,68 @@
+Relatório Semanal 
+Usuário ID: 8
+Período: Últimos 7 dias
+------------------------------------------------
+
+Evento: Conferência de Inteligência Artificial Aplicada
+Descrição: Debates sobre aplicações práticas de IA em negócios e governo
+Início: 2025-12-27T08:00
+Fim: 2025-12-27T18:00
+Local: Campinas - SP
+Categoria: Tecnologia
+-----------------------------------------------
+Evento: Cúpula de Arquitetura Moderna
+Descrição: Discussões sobre urbanismo, sustentabilidade e design arquitetônico
+Início: 2025-12-19T09:00
+Fim: 2025-12-19T18:00
+Local: Brasília - DF
+Categoria: Arquitetura
+-----------------------------------------------
+Evento: Festival de Tecnologia & Games
+Descrição: Demonstrações, palestras e competições de e-sports
+Início: 2025-12-14T10:00
+Fim: 2025-12-15T22:00
+Local: São Paulo - SP
+Categoria: Tecnologia
+-----------------------------------------------
+Evento: Encontro Nacional de RH
+Descrição: Discussões sobre gestão de pessoas, liderança e tendências de RH
+Início: 2025-12-09T08:00
+Fim: 2025-12-09T17:00
+Local: Salvador - BA
+Categoria: Negócios
+-----------------------------------------------
+Evento: Fórum de Sustentabilidade Empresarial
+Descrição: Mesa redonda sobre ESG e práticas sustentáveis
+Início: 2025-12-03T09:30
+Fim: 2025-12-03T15:30
+Local: Belo Horizonte - MG
+Categoria: Sustentabilidade
+-----------------------------------------------
+Evento: Simpósio de Marketing Digital
+Descrição: Estratégias de redes sociais, SEO e análise de dados
+Início: 2025-11-30T09:00
+Fim: 2025-11-30T17:30
+Local: Curitiba - PR
+Categoria: Marketing
+-----------------------------------------------
+Evento: Treinamento Avançado de Cibersegurança
+Descrição: Workshop técnico para administradores de sistemas e analistas de segurança
+Início: 2025-11-26T08:00
+Fim: 2025-11-26T18:00
+Local: Florianópolis - SC
+Categoria: Tecnologia
+-----------------------------------------------
+Evento: Mostra de Arte Moderna
+Descrição: Exposição de artistas contemporâneos brasileiros
+Início: 2025-11-21T10:00
+Fim: 2025-11-21T20:00
+Local: São Paulo - SP
+Categoria: Cultura
+-----------------------------------------------
+Evento: Encontro de Empreendedorismo Feminino
+Descrição: Painéis de discussão e networking voltados para liderança feminina
+Início: 2025-11-18T14:00
+Fim: 2025-11-18T19:00
+Local: Rio de Janeiro - RJ
+Categoria: Negócios
+-----------------------------------------------
