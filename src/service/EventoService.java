@@ -6,19 +6,22 @@ package service;
 
 import model.Evento;
 import repository.EventoRepository;
-import java.time.LocalDate;
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.sql.Date;
 import java.util.List;
-import java.sql.Date;
 
 public class EventoService {
-    private EventoRepository eventoRepository = new EventoRepository();
+    private final EventoRepository eventoRepository;
 
-    public boolean cadastrarEvento (Evento novoEvento) {
+    public EventoService(){
+        this.eventoRepository = new EventoRepository();
+    }
+
+    public boolean cadastrarEvento (Evento novoEvento, int usuarioId) {
         try {
-            if (temConflito(novoEvento.getDataInicio(), novoEvento.getDataFim())) {
+            if (temConflito(novoEvento.getDataInicio(), novoEvento.getDataFim(), usuarioId)) {
                 System.out.println("Confilito detectado: já existe um evento nesse período!");
                 return false;
             }
@@ -32,11 +35,14 @@ public class EventoService {
         }
     }
 
-
-    public boolean temConflito(LocalDateTime dataInicio, LocalDateTime dataFim) {
+    /**
+     * @param dataInicio pega data de início de um novo evento a ser inserido para comprar com outros eventos de incrição
+     * @param dataFim o mesmo mas para o fim
+     */
+    private boolean temConflito(LocalDateTime dataInicio, LocalDateTime dataFim, int usuarioId) {
         try {
-            List<Evento> eventos = eventoRepository.listarTodos();
-            for (Evento e : eventos){
+            List<Evento> eventosUsuario = eventoRepository.listarPorUsuario(usuarioId);
+            for (Evento e : eventosUsuario){
                 boolean conflito = !(dataFim.isBefore(e.getDataInicio()) || dataInicio.isAfter(e.getDataFim()));
                 if (conflito) {
                     return true;
@@ -49,24 +55,12 @@ public class EventoService {
         return false;
     }
 
-    public List<Evento> listarEventos() {
-        try {
-            return eventoRepository.listarTodos();
-        } catch (Exception e) {
-            System.err.println("Erro ao listar eventos: " + e.getMessage());
-            e.printStackTrace();
-            return new ArrayList<>();
-        }
-    }
-
     public List<Evento> filtrarPorCategoria(String categoria) {
         List<Evento> filtrados = new ArrayList<>();
         try {
             for (Evento e : eventoRepository.listarTodos()) {
                 if (e.getCategoria() != null && e.getCategoria().equalsIgnoreCase(categoria)) {
                     filtrados.add(e);
-
-
                 }
             }
         } catch (Exception e) {
@@ -87,6 +81,23 @@ public class EventoService {
     }
 
     public List<Evento> buscarPorData(Date data) {
-        return eventoRepository.buscarPorData(data);
+        try {
+            Timestamp dataTimestamp = new Timestamp(data.getTime());
+            return eventoRepository.buscarPorData(dataTimestamp);
+        } catch (Exception e) {
+            System.err.println("Erro ao buscar evento por data: " + e.getMessage());
+            e.printStackTrace();
+            return new ArrayList<>();
+        }
+    }
+
+    public List<Evento> filtrarPorLocal(String local) {
+        try {
+            return eventoRepository.filtrarPorLocal(local);
+        } catch (Exception e) {
+            System.err.println("Erro ao filtrar eventos por local: " + e.getMessage());
+            e.printStackTrace();
+            return new ArrayList<>();
+        }
     }
 }
