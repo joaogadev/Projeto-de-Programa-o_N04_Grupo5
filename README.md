@@ -1,6 +1,6 @@
 # Projeto-de-Programa-o_N04_Grupo5
 
-Um parágrafo da descrição do projeto vai aqui
+Um projeto com a funcinalidade de gerenciar a criação, organização e visualização de eventos, controlando horários, locais e prevenindo conflitos de agenda, garantindo que a programação geral do sistema seja consistente e acessível aos usuários.
 
 
 ### 📋 Pré-requisitos
@@ -49,6 +49,7 @@ Mencione todos aqueles que ajudaram a levantar o projeto desde o seu início
   
   
 Você também pode ver a lista de todos os [colaboradores](https://github.com/joaogadev/Projeto-de-Programa-o_N04_Grupo5/graphs/contributors/) que participaram deste projeto.
+
 
 
 
