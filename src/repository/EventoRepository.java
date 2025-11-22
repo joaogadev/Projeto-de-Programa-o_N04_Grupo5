@@ -113,6 +113,42 @@ public class EventoRepository {
         }
         return eventos;
     }
+    public List<Evento> encontrarInscricoes(LocalDate data, int usuarioId){
+        List<Evento> eventos = new ArrayList<>();
+
+        String sql = """
+                SELECT e.Evento_id,
+                    e.Admin_id,
+                    e.nome ,
+                    e.descricao,
+                    e.dataInicio,
+                    e.dataFim,
+                    e.local,
+                    e.categoria,
+                    i.status
+                FROM Inscricao i
+                JOIN Evento e ON i.Evento_id = e.Evento_id
+                WHERE i.Usuario_id = ? and i.status = "Confirmado" and 
+                DATE(dataInicio) = ?
+                ORDER BY e.dataInicio;   
+                """;
+
+        try (Connection conexao = MyJDBC.getConnection();
+             PreparedStatement stmt = conexao.prepareStatement(sql)) {
+
+            stmt.setInt(1, usuarioId);
+            stmt.setDate(2, Date.valueOf(data));
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                eventos.add(mapResultSetEvento(rs));
+            }
+        } catch (SQLException e) {
+            System.err.println("Erro ao listar eventos do usuário: " + e.getMessage());
+            e.printStackTrace();
+        }
+        return eventos;
+    }
 
     public List<Evento> buscarPorData(java.sql.Timestamp data) {
         List<Evento> eventos = new ArrayList<>();
