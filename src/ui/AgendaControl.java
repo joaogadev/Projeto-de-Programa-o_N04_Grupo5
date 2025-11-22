@@ -103,7 +103,7 @@ public class AgendaControl {
             // Atualiza a View
             agendaView.exibirEventos(eventos, localDate);
         }else{
-            List<Evento> eventos = agendaService.filtrarPorUsuario(usuario.getId());
+            List<Evento> eventos = agendaService.listarInscricoesUsuario(localDate, usuario.getId());
 
             // Atualiza a View
             agendaView.exibirEventos(eventos, localDate);
@@ -112,34 +112,61 @@ public class AgendaControl {
 
 
      //Atualiza as cores dos dias no calendário com base na existência de eventos.
-    private void atualizarCoresDias() {
-        int mes = agendaView.getCalendar().getMonthChooser().getMonth() + 1; // janeiro = 0
-        int ano = agendaView.getCalendar().getYearChooser().getYear();
+     //Atualiza as cores dos dias no calendário com base na existência de eventos.
+     private void atualizarCoresDias() {
+         Integer userid = getUsuarioId();
+         int mes = agendaView.getCalendar().getMonthChooser().getMonth() + 1; // janeiro = 0
+         int ano = agendaView.getCalendar().getYearChooser().getYear();
+         if (userid == null) {
+             for (int i = 1; i <= 31; i++) {
+                 LocalDate data;
+                 try {
+                     data = LocalDate.of(ano, mes, i);
+                 } catch (Exception e) {
+                     continue;
+                 }
 
-        for (int i = 1; i <= 31; i++) {
-            LocalDate data;
-            try {
-                data = LocalDate.of(ano, mes, i);
-            } catch (Exception e) {
-                continue;
-            }
+                 List<Evento> eventos = agendaService.filtrarPorDia(data);
 
-            List<Evento> eventos = agendaService.filtrarPorDia(data);
+                 Color cor = Color.WHITE; // padrão
+                 for (Evento ev : eventos) {
+                     if (ev.getStatus().equalsIgnoreCase("cheio")) {
+                         cor = Color.RED;
+                         break;
+                     } else {
+                         cor = Color.YELLOW;
+                     }
+                 }
 
-            Color cor = Color.WHITE; // padrão
-            for (Evento ev : eventos) {
-                if (ev.getStatus().equalsIgnoreCase("cheio")) {
-                    cor = Color.RED;
-                    break;
-                } else {
-                    cor = Color.YELLOW;
-                }
-            }
+                 // Atualiza a cor do dia na View
+                 agendaView.colorirDias(i, cor);
+             }
+         }else{
+             for (int i = 1; i <= 31; i++) {
+                 LocalDate data;
+                 try {
+                     data = LocalDate.of(ano, mes, i);
+                 } catch (Exception e) {
+                     continue;
+                 }
 
-            // Atualiza a cor do dia na View
-            agendaView.colorirDias(i, cor);
-        }
-    }
+                 List<Evento> eventos = agendaService.listarInscricoesUsuario(data, userid);
+
+                 Color cor = Color.WHITE; // padrão
+                 for (Evento ev : eventos) {
+                     if (ev.getStatus().equalsIgnoreCase("cheio")) {
+                         cor = Color.RED;
+                         break;
+                     } else {
+                         cor = Color.YELLOW;
+                     }
+                 }
+
+                 // Atualiza a cor do dia na View
+                 agendaView.colorirDias(i, cor);
+             }
+         }
+     }
 
     // handlers de eventos na view
     private void gerarRelatorio() {

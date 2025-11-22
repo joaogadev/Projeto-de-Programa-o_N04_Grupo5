@@ -34,6 +34,7 @@ public class AgendaService {
     }
 
     public List<Evento> filtrarPorUsuario(int usuario_id){return eventoRepository.listarPorUsuario(usuario_id);}
+    public List<Evento> listarInscricoesUsuario(LocalDate data, int usuarioId){return eventoRepository.encontrarInscricoes(data, usuarioId);};
     /*
     public static void main(String[] args) {
         AgendaService service = new AgendaService();
